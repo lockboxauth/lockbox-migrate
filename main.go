@@ -4,10 +4,10 @@ import (
 	"database/sql"
 	"os"
 
-	accountMigrations "impractical.co/auth/accounts/migrations"
-	grantMigrations "impractical.co/auth/grants/migrations"
-	scopeMigrations "impractical.co/auth/scopes/migrations"
-	tokenMigrations "impractical.co/auth/tokens/migrations"
+	accountMigrations "lockbox.dev/accounts/storers/postgres/migrations"
+	grantMigrations "lockbox.dev/grants/storers/postgres/migrations"
+	scopeMigrations "lockbox.dev/scopes/storers/postgres/migrations"
+	tokenMigrations "lockbox.dev/tokens/storers/postgres/migrations"
 
 	_ "github.com/lib/pq"
 	migrate "github.com/rubenv/sql-migrate"
