@@ -2,7 +2,7 @@ bitbucket.org/ww/goautoneg v0.0.0-20120707110453-75cd24fc2f2c/go.mod h1:1vhO7Mn/
 darlinggo.co/api v0.0.0-20160924005218-06eb95038fc2/go.mod h1:jdJuzT26vs0w+//pW4dw6uklR6p8HOrpqy0v64wii3o=
 darlinggo.co/pan v0.1.0/go.mod h1:xbu2qSVpLk3ikvhCAaFtWQxSSBQtgqzdYNp6y6aZloc=
 darlinggo.co/pan v0.2.0/go.mod h1:xbu2qSVpLk3ikvhCAaFtWQxSSBQtgqzdYNp6y6aZloc=
-darlinggo.co/trout v1.0.1/go.mod h1:4yu6HnuPMhLOBMdf5NrKz9IQ1npg335LHG0+bmNRNQk=
+darlinggo.co/trout/v2 v2.0.1/go.mod h1:+qZ3FE0kpSBYFF8qQV8yGQ8SN600xQYpo37TrUZkWwo=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Masterminds/semver v1.4.2/go.mod h1:MB6lktGJrhw8PrUyiEoblNEGEQ+RzHPF078ddwwvV3Y=
 github.com/armon/consul-api v0.0.0-20180202201655-eb2c6b5be1b6/go.mod h1:grANhF5doyWs3UAsr3K4I6qtAmlQcZDesFNEHPZAzj8=
@@ -182,6 +182,16 @@ gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7/go.mod h1:dt/ZhP58zS4L8KSrWD
 gopkg.in/yaml.v2 v2.2.1/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 impractical.co/pqarrays v0.0.0-20170820231347-970404683d98/go.mod h1:LvseckuvU0LSgtmDKHlmfnK/ebwBk6KLMD01X4N2QMw=
+lockbox.dev/accounts v0.1.0 h1:iA0CAXX8g75mays3g4krDRmpw20P88cgH55q5EhEdH4=
+lockbox.dev/accounts v0.1.0/go.mod h1:yAlobYyLV3g7Xph6HQwvh5GPX98g1co0VKCb5VXm0V4=
+lockbox.dev/grants v0.1.0 h1:VtCRrNJq6d0In5yEQYWVrCy6DsnjR2e+oyfoSRA/xO8=
+lockbox.dev/grants v0.1.0/go.mod h1:VnkD4t4xIaiY6gJPiWJLErgd8K+GnYck3svfW0uDPxY=
+lockbox.dev/hmac v0.1.0/go.mod h1:4s83OfmK63Y9l4pKjEv1fezObEVam6xcgqDJdPIQdtM=
+lockbox.dev/scopes v0.1.0 h1:ukO+nTTxlUp0AXfzR6sIm0u8fchQHk3eDANzJnnv6PM=
+lockbox.dev/scopes v0.1.0/go.mod h1:kR7CoQOfTUe7JwaB16EUvlFvwwgYTa7+gV3CH0NTSrw=
+lockbox.dev/sessions v0.1.0/go.mod h1:miBCKmnPiFY7VVcFvlFYwDOuL8rwHHsh61KFhhi6B44=
+lockbox.dev/tokens v0.1.0 h1:FLD06dJDAGNdxxsmzX9WdfvSiWATxGT/g98o36RChb4=
+lockbox.dev/tokens v0.1.0/go.mod h1:THvoXbd6+IPj9Wd3T7vJWmU0FCxPXlkJdmsXtLbK1nk=
 rsc.io/pdf v0.1.1/go.mod h1:n8OzWcQ6Sp37PL01nO98y4iUCRdTGarVfzxY20ICaU4=
 yall.in v0.0.1 h1:oQkgnFIY1GmRmWLXjat+Lt8KE/yD3PbEYP7lt71utpo=
 yall.in v0.0.1/go.mod h1:sihZtLjLdINMcMiqCZ6juYVK9XuWt1RaMwGnwGlK1ag=
