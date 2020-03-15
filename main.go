@@ -5,6 +5,7 @@ import (
 	"os"
 
 	accountMigrations "lockbox.dev/accounts/storers/postgres/migrations"
+	clientMigrations "lockbox.dev/clients/storers/postgres/migrations"
 	grantMigrations "lockbox.dev/grants/storers/postgres/migrations"
 	scopeMigrations "lockbox.dev/scopes/storers/postgres/migrations"
 	tokenMigrations "lockbox.dev/tokens/storers/postgres/migrations"
@@ -28,49 +29,43 @@ func main() {
 		log.WithError(err).Error("error connecting to postgres")
 		os.Exit(1)
 	}
-	accountsMigrations := &migrate.AssetMigrationSource{
-		Asset:    accountMigrations.Asset,
-		AssetDir: accountMigrations.AssetDir,
-		Dir:      "sql",
+
+	m := map[string]*migrate.AssetMigrationSource{
+		"accounts": &migrate.AssetMigrationSource{
+			Asset:    accountMigrations.Asset,
+			AssetDir: accountMigrations.AssetDir,
+			Dir:      "sql",
+		},
+		"clients": &migrate.AssetMigrationSource{
+			Asset:    clientMigrations.Asset,
+			AssetDir: clientMigrations.AssetDir,
+			Dir:      "sql",
+		},
+		"grants": &migrate.AssetMigrationSource{
+			Asset:    grantMigrations.Asset,
+			AssetDir: grantMigrations.AssetDir,
+			Dir:      "sql",
+		},
+		"scopeS": &migrate.AssetMigrationSource{
+			Asset:    scopeMigrations.Asset,
+			AssetDir: scopeMigrations.AssetDir,
+			Dir:      "sql",
+		},
+		"tokens": &migrate.AssetMigrationSource{
+			Asset:    tokenMigrations.Asset,
+			AssetDir: tokenMigrations.AssetDir,
+			Dir:      "sql",
+		},
 	}
-	_, err = migrate.Exec(pg, "postgres", accountsMigrations, migrate.Up)
-	if err != nil {
-		log.WithError(err).Error("error running accounts migrations")
-		pg.Close()
-		os.Exit(1)
-	}
-	grantsMigrations := &migrate.AssetMigrationSource{
-		Asset:    grantMigrations.Asset,
-		AssetDir: grantMigrations.AssetDir,
-		Dir:      "sql",
-	}
-	_, err = migrate.Exec(pg, "postgres", grantsMigrations, migrate.Up)
-	if err != nil {
-		log.WithError(err).Error("error running grants migrations")
-		pg.Close()
-		os.Exit(1)
-	}
-	scopesMigrations := &migrate.AssetMigrationSource{
-		Asset:    scopeMigrations.Asset,
-		AssetDir: scopeMigrations.AssetDir,
-		Dir:      "sql",
-	}
-	_, err = migrate.Exec(pg, "postgres", scopesMigrations, migrate.Up)
-	if err != nil {
-		log.WithError(err).Error("error runing scopes migrations")
-		pg.Close()
-		os.Exit(1)
-	}
-	tokensMigrations := &migrate.AssetMigrationSource{
-		Asset:    tokenMigrations.Asset,
-		AssetDir: tokenMigrations.AssetDir,
-		Dir:      "sql",
-	}
-	_, err = migrate.Exec(pg, "postgres", tokensMigrations, migrate.Up)
-	if err != nil {
-		log.WithError(err).Error("error running tokens migrations")
-		pg.Close()
-		os.Exit(1)
+	for pkg, source := range m {
+		log.WithField("pkg", pkg).Debug("running migrations")
+		migrate.SetTable("migrations_" + pkg)
+		_, err = migrate.Exec(pg, "postgres", source, migrate.Up)
+		if err != nil {
+			log.WithError(err).WithField("pkg", pkg).Error("error running migrations")
+			pg.Close()
+			os.Exit(1)
+		}
 	}
 	pg.Close()
 	log.Info("migrations complete")
