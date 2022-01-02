@@ -41,7 +41,7 @@ func main() {
 			AssetDir: clientMigrations.AssetDir,
 			Dir:      "sql",
 		},
-		"grants": grantsPostgres.MigrationSource(),
+		"grants": grantsPostgres.MigrationsSource(),
 		"scopes": &migrate.AssetMigrationSource{
 			Asset:    scopeMigrations.Asset,
 			AssetDir: scopeMigrations.AssetDir,
