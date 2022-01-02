@@ -6,7 +6,7 @@ import (
 
 	accountMigrations "lockbox.dev/accounts/storers/postgres/migrations"
 	clientMigrations "lockbox.dev/clients/storers/postgres/migrations"
-	grantMigrations "lockbox.dev/grants/storers/postgres/migrations"
+	grantsPostgres "lockbox.dev/grants/storers/postgres"
 	scopeMigrations "lockbox.dev/scopes/storers/postgres/migrations"
 	tokenMigrations "lockbox.dev/tokens/storers/postgres/migrations"
 
@@ -30,7 +30,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	m := map[string]*migrate.AssetMigrationSource{
+	m := map[string]migrate.MigrationSource{
 		"accounts": &migrate.AssetMigrationSource{
 			Asset:    accountMigrations.Asset,
 			AssetDir: accountMigrations.AssetDir,
@@ -41,12 +41,8 @@ func main() {
 			AssetDir: clientMigrations.AssetDir,
 			Dir:      "sql",
 		},
-		"grants": &migrate.AssetMigrationSource{
-			Asset:    grantMigrations.Asset,
-			AssetDir: grantMigrations.AssetDir,
-			Dir:      "sql",
-		},
-		"scopeS": &migrate.AssetMigrationSource{
+		"grants": grantsPostgres.MigrationSource(),
+		"scopes": &migrate.AssetMigrationSource{
 			Asset:    scopeMigrations.Asset,
 			AssetDir: scopeMigrations.AssetDir,
 			Dir:      "sql",
