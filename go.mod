@@ -8,7 +8,7 @@ require (
 	lockbox.dev/grants v0.6.0
 	lockbox.dev/scopes v0.3.0
 	lockbox.dev/tokens v0.4.0
-	yall.in v0.0.7
+	yall.in v0.0.8
 )
 
 go 1.13
