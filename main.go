@@ -24,13 +24,13 @@ func main() {
 		log.Error("PG_DB must be set")
 		os.Exit(1)
 	}
-	pg, err := sql.Open("postgres", connString)
+	pgConn, err := sql.Open("postgres", connString)
 	if err != nil {
 		log.WithError(err).Error("error connecting to postgres")
 		os.Exit(1)
 	}
 
-	m := map[string]migrate.MigrationSource{
+	packageMigrations := map[string]migrate.MigrationSource{
 		"accounts": &migrate.AssetMigrationSource{
 			Asset:    accountMigrations.Asset,
 			AssetDir: accountMigrations.AssetDir,
@@ -53,16 +53,23 @@ func main() {
 			Dir:      "sql",
 		},
 	}
-	for pkg, source := range m {
+	for pkg, source := range packageMigrations {
 		log.WithField("pkg", pkg).Debug("running migrations")
 		migrate.SetTable("migrations_" + pkg)
-		_, err = migrate.Exec(pg, "postgres", source, migrate.Up)
+		_, err = migrate.Exec(pgConn, "postgres", source, migrate.Up)
 		if err != nil {
 			log.WithError(err).WithField("pkg", pkg).Error("error running migrations")
-			pg.Close()
+			err = pgConn.Close()
+			if err != nil {
+				log.WithError(err).WithField("pkg", pkg).Error("error closing postgres control connection")
+			}
 			os.Exit(1)
 		}
 	}
-	pg.Close()
+	err = pgConn.Close()
+	if err != nil {
+		log.WithError(err).Error("error closing postgres control connection")
+		os.Exit(1)
+	}
 	log.Info("migrations complete")
 }
