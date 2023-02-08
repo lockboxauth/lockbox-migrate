@@ -2,7 +2,7 @@ module lockbox.dev/cmd/lockbox-migrate
 
 require (
 	github.com/lib/pq v1.10.7
-	github.com/rubenv/sql-migrate v1.2.0
+	github.com/rubenv/sql-migrate v1.3.1
 	lockbox.dev/accounts v0.4.0
 	lockbox.dev/clients v0.6.0
 	lockbox.dev/grants v0.6.0
